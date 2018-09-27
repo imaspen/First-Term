@@ -14,3 +14,6 @@
 
 # ignore scratch folder
 scratch
+
+# ignore IntelliJ files
+.idea
