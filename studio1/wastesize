@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p ~/.waste
 declare -i lines
 lines=$(ls -l ~/.waste | wc -l)-1
 echo $lines
