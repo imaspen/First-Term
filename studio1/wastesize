@@ -1,0 +1,4 @@
+#!/bin/bash
+declare -i lines
+lines=$(ls -l ~/.waste | wc -l)-1
+echo $lines
