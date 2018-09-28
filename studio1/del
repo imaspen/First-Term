@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir -p ~/.waste
+mv $1 ~/.waste
