@@ -1,4 +1,4 @@
-def get_number(thing):
+def get_input(thing):
     while True:
         response = input("How many %s are there? " % thing)
         try:
@@ -7,16 +7,16 @@ def get_number(thing):
             print("Please enter a whole number.")
 
 
-number_of_pupils = get_number("pupils")
-number_of_sweets = get_number("sweets")
+def get_value(thing):
+    response = get_input(thing)
+    while response <= 0:
+        print("Please enter a value greater than 0.")
+        response = get_input(thing)
+    return response
 
-while number_of_pupils <= 0:
-    print("You can't give something to no one.")
-    number_of_pupils = get_number("pupils")
 
-while number_of_sweets <= 0:
-    print("You can't give them nothing.")
-    number_of_sweets = get_number("sweets")
+number_of_pupils = get_value("pupils")
+number_of_sweets = get_value("sweets")
 
 print("Sweets per pupil: " + str(number_of_sweets // number_of_pupils))
 print("Sweets left over: " + str(number_of_sweets % number_of_pupils))
