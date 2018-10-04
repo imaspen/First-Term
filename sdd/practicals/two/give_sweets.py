@@ -1,10 +1,10 @@
 def get_number(thing):
-    response = input("How many %s are there? " % thing)
-    try:
-        return int(response)
-    except ValueError:
-        print("Please enter a whole number.")
-        return get_number(thing)
+    while True:
+        response = input("How many %s are there? " % thing)
+        try:
+            return int(response)
+        except ValueError:
+            print("Please enter a whole number.")
 
 
 number_of_pupils = get_number("pupils")
