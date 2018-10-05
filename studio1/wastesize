@@ -10,4 +10,4 @@ declare -i lines
 lines=$(ls -l ~/.waste | wc -l)-1
 
 # Outputs the number of files in ~/.waste.
-echo $lines
+echo "Files in waste:" $lines
