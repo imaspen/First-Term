@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Run the chmod command, with the all + executable command, passing all passed arguments.
+chmod a+x "$@"
+
