@@ -1,5 +1,13 @@
 #!/bin/bash
+
+# Make the waste directory if it does not yet exist.
 mkdir -p ~/.waste
+
+# Declares an integer variable named lines,
 declare -i lines
+
+# Sets lines equal to the number of lines output by ls -l, minus the top info line,
 lines=$(ls -l ~/.waste | wc -l)-1
+
+# Outputs the number of files in ~/.waste.
 echo $lines
