@@ -4,9 +4,9 @@
 mkdir -p ~/.waste
 
 # Test if we are attempting to delete a directory and error.
-if [ -d $1 ]
+if [ -d "$1" ]
 then echo "del: cannot delete $1: Is a directory."
 	exit 1
-else mv $1 ~/.waste
+else mv "$1" ~/.waste
 fi
 
