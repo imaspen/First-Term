@@ -2,9 +2,10 @@
 
 # Output templating
 if [ "$(ls -A ~/.waste)" ]; then
-	echo -e "Size (bytes) \t File name"
-	WASTE_OUT=$(wc -c ~/.waste/*)
-	echo $WASTE_OUT
+	echo -e "Size (bytes), file name"
+	cd ~/.waste/
+	wc -c *
+	cd - > /dev/null
 else
 	echo "Waste is empty."
 fi
