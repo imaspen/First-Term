@@ -1,0 +1,18 @@
+#!/bin/bash
+
+COMMAND="head"
+
+for arg in "$@"; do
+	if [ ${arg:0:1} = "-" ]; then
+		OPT=${arg:1:1}
+		if [ "$OPT" = "t" ]; then
+			COMMAND="tail"
+		elif [ "$OPT" = "h" ]; then
+			COMMAND="head"
+		fi
+		COMMAND="$COMMAND -n ${arg:2}"
+	fi
+done
+
+$COMMAND ${!#}/*
+
