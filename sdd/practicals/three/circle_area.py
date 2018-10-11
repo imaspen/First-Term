@@ -19,6 +19,6 @@ def get_radius():
             print("Please enter a number.")
 
 
-area = 3.14 * get_radius() ** 2
+area = (22/7) * (get_radius() ** 2)
 
 print("Cirle area:", area)
