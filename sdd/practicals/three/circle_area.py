@@ -4,6 +4,7 @@ Gets the radius a circle, then returns the area.
 AT
 11-10-2018
 """
+from math import pi
 
 
 def get_radius():
@@ -19,6 +20,6 @@ def get_radius():
             print("Please enter a number.")
 
 
-area = (22/7) * (get_radius() ** 2)
+area = pi * (get_radius() ** 2)
 
 print("Cirle area:", area)
