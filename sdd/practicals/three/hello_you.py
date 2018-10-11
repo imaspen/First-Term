@@ -7,4 +7,7 @@ AT
 
 name = input("Hello, who are you? ")
 
-print("Hello, {0}. It is good to meet you.".format(name))
+if len(name) > 0:
+    print("Hello, {0}. It is good to meet you.".format(name))
+else:
+    print("Hello World.")
