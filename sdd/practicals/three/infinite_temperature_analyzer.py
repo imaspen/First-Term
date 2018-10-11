@@ -11,7 +11,10 @@ while True:
     try:
         readings.append(float(input("Enter a temperature reading or anything other than a number to finish: ")))
     except ValueError:
-        break
+        if len(readings) == 0:
+            print("Please enter at least one reading.")
+        else:
+            break
 
 
 readings.sort()
