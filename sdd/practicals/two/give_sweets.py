@@ -9,7 +9,7 @@ AT
 def get_input(thing):
     """Ask the user to enter a whole number of things and return it"""
     while True:
-        response = input("How many %s are there? " % thing)
+        response = input("How many {0} are there? ".format(thing))
         try:
             return int(response)
         except ValueError:
