@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Make waste directory if it does not exist.
+mkdir -p ~/.waste
+
+# If waste contains files, move to the waste directory, output bytes for each file, then move back.
+if [ "$(ls -A ~/.waste)" ]; then
+	# Output templating
+	echo -e "Size (bytes), file name"
+	cd ~/.waste/
+	wc -c *
+	cd - > /dev/null
+else
+	echo "Waste is empty."
+fi
