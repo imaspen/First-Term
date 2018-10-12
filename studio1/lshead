@@ -1,28 +1,34 @@
 #!/bin/bash
 
+# Setup variables to be used in the final command.
 COMMAND="head"
 COUNT=10
 DIRECTORY=.
 FILES=""
 
+# For each passed argument, change the relevant variable.
 for arg in "$@"; do
+	# Choose head or tail with -h, -t, --head, or --tail.
 	if [[ "$arg" = "-t" ]] || [[ "$arg" = "--tail" ]]; then
 		COMMAND="tail"
 	elif [[ "$arg" = "-h" ]] || [[ "$arg" = "--head" ]]; then
 		COMMAND="head"
-	elif [[ "$arg" =~ ^[0-9]+$ ]]; then
-		echo test
-		COUNT=$arg
+	# If the argument was a directory, use it as the default.
 	elif [[ -d $arg ]]; then
 		DIRECTORY=$arg
+	# Finally, if the argument was comprised only of digits, use it as the count for head/tail. 
+	elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+		COUNT=$arg
 	fi
 done
 
+# Get all non-directory files from the given directory.
 for file in $DIRECTORY/*; do
 	if [[ ! -d $file ]]; then
 		FILES="$FILES $file"
 	fi
 done
 
+# Run either head or tail, for the given number of lines, with the list of files as the argument.
 $COMMAND -n$COUNT $FILES
 
