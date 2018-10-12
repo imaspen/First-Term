@@ -17,3 +17,4 @@ scratch
 
 # ignore IntelliJ files
 .idea
+*.iml
