@@ -1,18 +1,28 @@
 #!/bin/bash
 
 COMMAND="head"
+COUNT=10
+DIRECTORY=.
+FILES=""
 
 for arg in "$@"; do
-	if [ ${arg:0:1} = "-" ]; then
-		OPT=${arg:1:1}
-		if [ "$OPT" = "t" ]; then
-			COMMAND="tail"
-		elif [ "$OPT" = "h" ]; then
-			COMMAND="head"
-		fi
-		COMMAND="$COMMAND -n ${arg:2}"
+	if [[ "$arg" = "-t" ]] || [[ "$arg" = "--tail" ]]; then
+		COMMAND="tail"
+	elif [[ "$arg" = "-h" ]] || [[ "$arg" = "--head" ]]; then
+		COMMAND="head"
+	elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+		echo test
+		COUNT=$arg
+	elif [[ -d $arg ]]; then
+		DIRECTORY=$arg
 	fi
 done
 
-$COMMAND ${!#}/*
+for file in $DIRECTORY/*; do
+	if [[ ! -d $file ]]; then
+		FILES="$FILES $file"
+	fi
+done
+
+$COMMAND -n$COUNT $FILES
 
