@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "" ]]; then
+	echo "Takes an argument, and asks for more input until a control character (*) is entered."
+	echo "Outputs the count of letters, digits, and other characters entered."
+	exit 0
+fi
+
+done=false
+input="$@"
+letters=0
+digits=0
+other=0
+
+while true; do
+	for (( i=0; i<${#input}; i++ )); do
+		char=${input:$i:1}
+		if [[ "$char" =~ [A-z] ]]; then
+			((letters++))
+		elif [[ "$char" =~ [0-9] ]]; then
+			((digits++))
+		else
+			((other++))
+			if [[ "$char" == "*" ]]; then
+				done=true
+				break		
+			fi
+		fi
+	done
+
+	if [[ $done == true ]]; then
+		break
+	fi
+
+	echo -n "Input a string or enter * to finish: "
+	read input
+done
+
+echo "Total length:" $((letters+digits+other))
+echo "Letters input:" $letters
+echo "Digits input:" $digits
+echo "Other characters (including control character):" $other
