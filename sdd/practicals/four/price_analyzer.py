@@ -23,13 +23,11 @@ prices = []
 for i in range(1, 6):
     prices.append(get_input(i))
 
-prices.sort()
-
 # Calculate output variables.
 total = sum(prices)
 average = total / len(prices)
-highest = prices[-1]
-lowest = prices[0]
+highest = max(prices)
+lowest = min(prices)
 
 # Output the results to the user.
 print("\nTotal price: {0}p\nAverage price: {1}p\nHighest price: {2}p\nLowest price: {3}p".format(
