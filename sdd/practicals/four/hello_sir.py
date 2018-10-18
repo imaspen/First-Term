@@ -2,7 +2,7 @@
 Takes a users name and greets them
 
 AT
-11-10-2018
+18-10-2018
 """
 
 name = input("Hello, who are you? ").capitalize()
