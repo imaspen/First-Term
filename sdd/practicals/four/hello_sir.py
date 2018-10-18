@@ -8,6 +8,9 @@ AT
 name = input("Hello, who are you? ").capitalize()
 
 if len(name) > 0:
+    if name[:4] == "Sir ":
+        name = name[4:].capitalize()
+
     if name == "Arthur":
         print("My Liege! It is good to meet you.")
     else:
