@@ -19,7 +19,7 @@ while true; do
 	# For each character in input, increment the relevant counter, and exit on the control character.
 	for (( i=0; i<${#input}; i++ )); do
 		char=${input:$i:1}
-		if [[ "$char" =~ [A-z] ]]; then
+		if [[ "$char" =~ [a-zA-Z] ]]; then
 			((letters++))
 		elif [[ "$char" =~ [0-9] ]]; then
 			((digits++))
