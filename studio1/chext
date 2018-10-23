@@ -1,0 +1,29 @@
+#!/bin/bash
+# Takes an input file extension and changes all files to another extension.
+
+# Set argument defaults
+current=''
+new=''
+dir=.
+dir_flag=false
+
+for arg in "$@"; do
+	if [[ $dir_flag = true ]]; then
+		dir=$arg
+		dir_flag=false
+	elif [[ "$arg" =~ ^((-d)|(--directory)) ]]; then
+		dir_flag=true
+	elif [[ $current = '' ]]; then
+		current=$arg
+	elif [[ $new = '' ]]; then
+		new=$arg
+	fi
+done
+
+cd $dir
+
+for file in *.$current; do
+	echo $file	
+done
+
+cd - > /dev/null
