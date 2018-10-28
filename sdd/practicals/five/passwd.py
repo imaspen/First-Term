@@ -11,5 +11,11 @@ def get_string(again = ""):
 
 
 if __name__ == "__main__":
-    if get_string() == get_string(" again"):
-        print("Password changed.")
+    password = get_string()
+    if 6 <= len(password) <= 12:
+        if password == get_string(" again"):
+            print("Password changed.")
+        else:
+            print("Passwords do not match.")
+    else:
+        print("Password must be between 6 and 12 characters long.")
