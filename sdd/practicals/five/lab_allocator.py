@@ -1,5 +1,5 @@
 """
-Take a number of students and computers per lab, and return how many labs are needed.
+Take a number of students and computers per lab and return how many labs are needed.
 
 AT
 28/10/18
@@ -8,16 +8,14 @@ import math
 
 
 def get_int(prompt):
-    entered = 0
     while True:
         try:
             entered = int(input("Enter the number of {0}: ".format(prompt)))
             if entered > 0:
                 return entered
             print("Please enter a number greater than 0.\n")
-
-        except:
-            print("Please enter an integer.")
+        except ValueError:
+            print("Please enter an integer.\n")
 
 
 if __name__ == "__main__":
