@@ -7,11 +7,14 @@ new=''
 dir=.
 dir_flag=false
 
+#Handle each arg
 for arg in "$@"; do
 	if [[ $dir_flag = true ]]; then
+		# If the directory flag is set, read the argument as the dir and unset directory flag
 		dir=$arg
 		dir_flag=false
 	elif [[ "$arg" =~ ^((-d)|(--directory)) ]]; then
+		# If directory argument given, set the directory flag
 		dir_flag=true
 	elif [[ $current = '' ]]; then
 		current=$arg
@@ -19,11 +22,17 @@ for arg in "$@"; do
 		new=$arg
 	fi
 done
-
+	
 cd $dir
 
+suffix='';
+if [[ $new != '' ]]; then
+	suffix=".$new"
+fi
+
+# Rename each file in the directory with the extension
 for file in *.$current; do
-	echo $file	
+	mv "$file" "${file%.$current}$suffix"
 done
 
 cd - > /dev/null
