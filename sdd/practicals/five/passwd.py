@@ -40,6 +40,7 @@ def get_password():
 
 
 def random_password():
+    """Generates a 16 character string made of random lower and uppercase letters and punctuation"""
     characters = string.ascii_lowercase + string.ascii_uppercase + string.punctuation
     password = ''
     for i in range(0, 16):
