@@ -25,11 +25,9 @@ def get_value(thing):
     return response
 
 
-# Get input
 number_of_pupils = get_value("pupils")
 number_of_sweets = get_value("sweets")
 
-# Print output
 print("Sweets per pupil: " + str(number_of_sweets // number_of_pupils))
 print("Sweets left over: " + str(number_of_sweets % number_of_pupils))
 
