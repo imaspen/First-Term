@@ -20,20 +20,20 @@ for arg in "$@"; do
         all_flag=true
     elif [[ "$arg" =~ ^((-s)|(--strip)) ]]; then
         strip_flag=true
-	elif [[ $current = '' ]] && [[ !$all_flag ]]; then
+	elif [[ $current = '' ]] && [[ $all_flag = false ]]; then
 		current=$arg
-	elif [[ $new = '' ]] && [[ !$strip_flag ]]; then
+	elif [[ $new = '' ]] && [[ $strip_flag = false ]]; then
 		new=".$arg"
 	fi
 done
 
-if [[ $current = '']] && [[ !$all_flag ]]; then
+if [[ $current = '' ]] && [[ $all_flag = false ]]; then
     echo "Please give an input file extension, or use -a to select all."
     echo "For more info use chext --help"
     exit 1
 fi
 
-if [[ $new = '' ]] && [[ !$strip_flag ]]; then
+if [[ $new = '' ]] && [[ $strip_flag = false ]]; then
     echo "Please enter an output file extension, or use -s to remove extensions."
     echo "For more info use chext --help"
     exit 1
@@ -42,8 +42,15 @@ fi
 cd $dir
 
 # Rename each file in the directory with the extension
-for file in *.$current; do
-	mv "$file" "${file%.$current}$suffix"
-done
+if [[ $all_flag ]]; then
+    for file in *; do
+        mv "$file" "${file%.*}$new" 
+    done
+else
+    for file in *.$current; do
+        mv "$file" "${file%.$current}$new"
+    done
+fi
 
 cd - > /dev/null
+
