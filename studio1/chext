@@ -6,29 +6,40 @@ current=''
 new=''
 dir=.
 dir_flag=false
+all_flag=false
+strip_flag=false
 
 #Handle each arg
 for arg in "$@"; do
 	if [[ $dir_flag = true ]]; then
-		# If the directory flag is set, read the argument as the dir and unset directory flag
 		dir=$arg
 		dir_flag=false
 	elif [[ "$arg" =~ ^((-d)|(--directory)) ]]; then
-		# If directory argument given, set the directory flag
 		dir_flag=true
-	elif [[ $current = '' ]]; then
+    elif [[ "$arg" =~ ^((-a)|(--all)) ]]; then
+        all_flag=true
+    elif [[ "$arg" =~ ^((-s)|(--strip)) ]]; then
+        strip_flag=true
+	elif [[ $current = '' ]] && [[ !$all_flag ]]; then
 		current=$arg
-	elif [[ $new = '' ]]; then
-		new=$arg
+	elif [[ $new = '' ]] && [[ !$strip_flag ]]; then
+		new=".$arg"
 	fi
 done
-	
-cd $dir
 
-suffix='';
-if [[ $new != '' ]]; then
-	suffix=".$new"
+if [[ $current = '']] && [[ !$all_flag ]]; then
+    echo "Please give an input file extension, or use -a to select all."
+    echo "For more info use chext --help"
+    exit 1
 fi
+
+if [[ $new = '' ]] && [[ !$strip_flag ]]; then
+    echo "Please enter an output file extension, or use -s to remove extensions."
+    echo "For more info use chext --help"
+    exit 1
+fi
+
+cd $dir
 
 # Rename each file in the directory with the extension
 for file in *.$current; do
