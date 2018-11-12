@@ -9,7 +9,7 @@ dir_flag=false
 all_flag=false
 strip_flag=false
 
-#Handle each arg
+# Handle each arg
 for arg in "$@"; do
 	if [[ $dir_flag = true ]]; then
 		dir=$arg
@@ -27,21 +27,20 @@ for arg in "$@"; do
 	fi
 done
 
+# Handle too few args
 if [[ $current = '' ]] && [[ $all_flag = false ]]; then
     echo "Please give an input file extension, or use -a to select all."
     echo "For more info use chext --help"
     exit 1
-fi
-
-if [[ $new = '' ]] && [[ $strip_flag = false ]]; then
+elif [[ $new = '' ]] && [[ $strip_flag = false ]]; then
     echo "Please enter an output file extension, or use -s to remove extensions."
     echo "For more info use chext --help"
     exit 1
 fi
 
+# Move to target directory, rename each file, and move back
 cd $dir
 
-# Rename each file in the directory with the extension
 if [[ $all_flag ]]; then
     for file in *; do
         mv "$file" "${file%.*}$new" 
