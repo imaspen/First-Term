@@ -22,11 +22,20 @@ def random_answer():
 def is_email(candidate):
     """
     Checks a string to check if it is a valid email address.
-    Parameters: potential email
-    Returns: True if email, False otherwise
+    :param candidate: the potential email address.
+    :return: True if is an email address, else False.
     """
-    email_check = re.compile("\A[\w_.]+@[\w.]+\.[a-zA-Z]+\Z")
+    email_check = re.compile("\A[^@\s]+@[^@\s]+\.[^@\s]+\Z")
     return email_check.match(candidate)
+
+
+def get_email_user(email_address):
+    """
+    Gets all of an email address that precedes the @.
+    :param email_address: the email address to strip.
+    :return: the string that precedes the @.
+    """
+    return email_address[:email_address.find("@")]
 
 
 if __name__ == "__main__":
