@@ -51,5 +51,15 @@ def get_ni_input():
             print("Bring me a shrubbery!")
 
 
+def question_has_string(question, search_string):
+    """
+    Checks if a string is within a question.
+    :param question: the string to search within
+    :param search_string: the string to search for
+    :return: True if question has string, else False
+    """
+    return search_string in question
+
+
 if __name__ == "__main__":
     pass
