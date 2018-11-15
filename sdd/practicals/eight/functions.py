@@ -38,5 +38,18 @@ def get_email_user(email_address):
     return email_address[:email_address.find("@")]
 
 
+def get_ni_input():
+    """
+    Asks the user to enter text until "Ni!" is entered, regardless of case.
+    :return: nothing.
+    """
+    while True:
+        if input("Enter a string: ").lower() == "ni!":
+            print("You may pass!")
+            return
+        else:
+            print("Bring me a shrubbery!")
+
+
 if __name__ == "__main__":
     pass
