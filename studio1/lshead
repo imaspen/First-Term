@@ -8,19 +8,17 @@ FILES=""
 
 # For each passed argument, change the relevant variable.
 while (( $# )); do
-	# Choose head or tail with -h, -t, --head, or --tail.
-	if [[ "$1" = "-t" ]] || [[ "$1" = "--tail" ]]; then
-		COMMAND="tail"
-        shift
-        COUNT="$1"
-	elif [[ "$1" = "-h" ]] || [[ "$1" = "--head" ]]; then
-		COMMAND="head"
-        shift
-        COUNT="$1"
-	# If the argument was a directory, use it as the default.
-	elif [[ -d $arg ]]; then
+	if [[ -d $arg ]]; then
 		DIRECTORY=$arg
-	fi
+    else
+        if [[ "$1" ~= ^((-t)|(--tail))$ ]]; then
+            COMMAND="tail"
+        elif [[ "$1" ~= ^((-h)|(--head))$ ]]; then
+            COMMAND="head"
+        fi
+        shift
+        COUNT="$1"
+    fi
     shift
 done
 
