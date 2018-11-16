@@ -10,9 +10,18 @@ dir=.
 all_flag=false
 strip_flag=false
 
+if (( $#==0 )) || [[ "$1" =~ ^((-h)|(--help))$ ]]; then
+    echo "chext: Changes all files of one extension to another."
+    echo "Usage: chext [-d dir] [in|-a] [out|-s]"
+    echo "  -d: set the directory to change file extensions, defaults to ."
+    echo "  -a: changes the extension for all files"
+    echo "  -s: removes file extensions"
+    exit 1
+fi
+
 # Handle each arg
 while (( $# )); do
-	if [[ "$1" =~ ^((-d)|(--directory)) ]]; then
+	if [[ "$1" =~ ^((-d)|(--directory))$ ]]; then
 		shift
         if [[ -d $1 ]]; then
             dir=$1
@@ -21,9 +30,9 @@ while (( $# )); do
             echo $info_string
             exit 1
         fi
-    elif [[ "$1" =~ ^((-a)|(--all)) ]]; then
+    elif [[ "$1" =~ ^((-a)|(--all))$ ]]; then
         all_flag=true
-    elif [[ "$1" =~ ^((-s)|(--strip)) ]]; then
+    elif [[ "$1" =~ ^((-s)|(--strip))$ ]]; then
         strip_flag=true
 	elif [[ $current = '' ]] && [[ $all_flag = false ]]; then
 		current="$1"
