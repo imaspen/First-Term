@@ -1,40 +1,55 @@
 #!/bin/bash
 # Takes an input file extension and changes all files to another extension.
 
+info_string="For more info, use chext --help"
+
 # Set argument defaults
 current=''
 new=''
 dir=.
-dir_flag=false
 all_flag=false
 strip_flag=false
 
+if (( $#==0 )) || [[ "$1" =~ ^((-h)|(--help))$ ]]; then
+    echo "chext: Changes all files of one extension to another."
+    echo "Usage: chext [-d dir] [in|-a] [out|-s]"
+    echo "  -d: set the directory to change file extensions, defaults to ."
+    echo "  -a: changes the extension for all files"
+    echo "  -s: removes file extensions"
+    exit 1
+fi
+
 # Handle each arg
-for arg in "$@"; do
-	if [[ $dir_flag = true ]]; then
-		dir=$arg
-		dir_flag=false
-	elif [[ "$arg" =~ ^((-d)|(--directory)) ]]; then
-		dir_flag=true
-    elif [[ "$arg" =~ ^((-a)|(--all)) ]]; then
+while (( $# )); do
+	if [[ "$1" =~ ^((-d)|(--directory))$ ]]; then
+		shift
+        if [[ -d $1 ]]; then
+            dir=$1
+        else
+            echo "Invalid directory given"
+            echo $info_string
+            exit 1
+        fi
+    elif [[ "$1" =~ ^((-a)|(--all))$ ]]; then
         all_flag=true
-    elif [[ "$arg" =~ ^((-s)|(--strip)) ]]; then
+    elif [[ "$1" =~ ^((-s)|(--strip))$ ]]; then
         strip_flag=true
 	elif [[ $current = '' ]] && [[ $all_flag = false ]]; then
-		current=$arg
+		current="$1"
 	elif [[ $new = '' ]] && [[ $strip_flag = false ]]; then
-		new=".$arg"
+		new=".$1"
 	fi
+    shift
 done
 
 # Handle too few args
 if [[ $current = '' ]] && [[ $all_flag = false ]]; then
     echo "Please give an input file extension, or use -a to select all."
-    echo "For more info use chext --help"
+    echo $info_string
     exit 1
 elif [[ $new = '' ]] && [[ $strip_flag = false ]]; then
     echo "Please enter an output file extension, or use -s to remove extensions."
-    echo "For more info use chext --help"
+    echo $info_string
     exit 1
 fi
 

@@ -7,19 +7,19 @@ DIRECTORY=.
 FILES=""
 
 # For each passed argument, change the relevant variable.
-for arg in "$@"; do
-	# Choose head or tail with -h, -t, --head, or --tail.
-	if [[ "$arg" = "-t" ]] || [[ "$arg" = "--tail" ]]; then
-		COMMAND="tail"
-	elif [[ "$arg" = "-h" ]] || [[ "$arg" = "--head" ]]; then
-		COMMAND="head"
-	# If the argument was a directory, use it as the default.
-	elif [[ -d $arg ]]; then
+while (( $# )); do
+	if [[ -d $arg ]]; then
 		DIRECTORY=$arg
-	# Finally, if the argument was comprised only of digits, use it as the count for head/tail. 
-	elif [[ "$arg" =~ ^[0-9]+$ ]]; then
-		COUNT=$arg
-	fi
+    else
+        if [[ "$1" ~= ^((-t)|(--tail))$ ]]; then
+            COMMAND="tail"
+        elif [[ "$1" ~= ^((-h)|(--head))$ ]]; then
+            COMMAND="head"
+        fi
+        shift
+        COUNT="$1"
+    fi
+    shift
 done
 
 # Get all non-directory files from the given directory.
