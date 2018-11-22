@@ -11,9 +11,9 @@ while (( $# )); do
 	if [[ -d $arg ]]; then
 		DIRECTORY=$arg
     else
-        if [[ "$1" ~= ^((-t)|(--tail))$ ]]; then
+        if [[ "$1" =~ ^((-t)|(--tail))$ ]]; then
             COMMAND="tail"
-        elif [[ "$1" ~= ^((-h)|(--head))$ ]]; then
+        elif [[ "$1" =~ ^((-h)|(--head))$ ]]; then
             COMMAND="head"
         fi
         shift
