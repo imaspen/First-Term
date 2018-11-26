@@ -3,19 +3,22 @@
 # Setup variables to be used in the final command.
 COMMAND="head"
 COUNT=10
+RECURSIVE=false
 DIRECTORY=.
 FILES=""
 
 # For each passed argument, change the relevant variable.
 while (( $# )); do
-	if [[ -d $arg ]]; then
-		DIRECTORY=$arg
-    else
-        if [[ "$1" =~ ^((-t)|(--tail))$ ]]; then
-            COMMAND="tail"
-        elif [[ "$1" =~ ^((-h)|(--head))$ ]]; then
-            COMMAND="head"
-        fi
+	if [[ -d $1 ]]; then
+		DIRECTORY=$1
+    elif [[ "$1" =~ ^((-r)|(--recursive))$ ]]; then
+        RECURSIVE=true
+    elif [[ "$1" =~ ^((-t)|(--tail))$ ]]; then
+        COMMAND="tail"
+        shift
+        COUNT="$1"
+    elif [[ "$1" =~ ^((-h)|(--head))$ ]]; then
+        COMMAND="head"
         shift
         COUNT="$1"
     fi
@@ -25,10 +28,10 @@ done
 # Get all non-directory files from the given directory.
 for file in $DIRECTORY/*; do
 	if [[ ! -d $file ]]; then
-		FILES="$FILES $file"
+        echo -e "\n### $file ###\n"
+        $COMMAND -n$COUNT $file
+    elif [[ $recursive = "true" ]]; then
+        ./$0 $file --$COMMAND $COUNT
 	fi
 done
-
-# Run either head or tail, for the given number of lines, with the list of files as the argument.
-$COMMAND -n$COUNT $FILES
 
