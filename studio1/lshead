@@ -11,6 +11,14 @@ FILES=""
 while (( $# )); do
 	if [[ -d $1 ]]; then
 		DIRECTORY=$1
+    elif [[ "$1" = "--help" ]]; then
+        echo "Prints the first or last lines of files in a directory."
+        echo "Usage: lshead [[--head|--tail] count] [--recursive] [directory]"
+        echo "Options:"
+        echo -e "\t-h, --head:\t\tview the first lines"
+        echo -e "\t-t, --tail:\t\tview the last lines"
+        echo -e "\t-r, --recursive:\tview files in subdirectories"
+        exit 1
     elif [[ "$1" =~ ^((-r)|(--recursive))$ ]]; then
         RECURSIVE=true
     elif [[ "$1" =~ ^((-t)|(--tail))$ ]]; then
@@ -21,6 +29,10 @@ while (( $# )); do
         COMMAND="head"
         shift
         COUNT="$1"
+    else
+        echo "Unrecognized argument: $1"
+        echo "Use lshead --help for more info."
+        exit 1
     fi
     shift
 done
