@@ -1,5 +1,11 @@
 #!/bin/bash
 
-# Run the chmod command, with the all + executable command, passing all passed arguments.
-chmod a+x "$@"
+if [[ -e $1 ]] && [[ ! -d $1 ]]; then
+    # Run the chmod command, with the all + executable command, passing the first argument.
+    chmod a+x "$1"
+else
+    echo "Error, no file given."
+    echo "Usage: chmx file"
+    exit 1
+fi
 
