@@ -7,7 +7,7 @@ public class BankAccountDemo {
     public static void main(String[] args) {
         // Create an account object
         System.out.println("Creating account object");
-        BankAccount account = new BankAccount("12345678", "John Doe", false);
+        BankAccount account = new BankAccount("John Doe");
         System.out.println("account = " + account);
         
         // Check setting account number
