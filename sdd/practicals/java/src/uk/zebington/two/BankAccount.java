@@ -1,5 +1,9 @@
 package uk.zebington.two;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
+
 /**
  * @author Aspen Thompson
  */
@@ -15,6 +19,22 @@ public class BankAccount {
         this.accountHolder = accountHolder;
         this.balance = 0.0;
         this.hasOverdraft = hasOverdraft;
+    }
+
+    public BankAccount(String accountHolder) {
+        this.accountNumber = generateRandomAccountNumber();
+        this.accountHolder = accountHolder;
+        this.balance = 0.0;
+        this.hasOverdraft = false;
+    }
+
+    private String generateRandomAccountNumber() {
+        StringBuilder accountNumber = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 8; i++) {
+            accountNumber.append(random.nextInt(10));
+        }
+        return accountNumber.toString();
     }
 
     public String getAccountNumber () {
