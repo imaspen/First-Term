@@ -9,8 +9,8 @@ FILES=""
 
 # For each passed argument, change the relevant variable.
 while (( $# )); do
-	if [[ -d $1 ]]; then
-		DIRECTORY=$1
+    if [[ -d $1 ]]; then
+        DIRECTORY=$1
     elif [[ "$1" = "--help" ]]; then
         echo "Prints the first or last lines of files in a directory."
         echo "Usage: lshead [[--head|--tail] count] [--recursive] [directory]"
@@ -39,11 +39,11 @@ done
 
 # Get all non-directory files from the given directory.
 for file in $DIRECTORY/*; do
-	if [[ ! -d $file ]]; then
+    if [[ ! -d $file ]]; then
         echo -e "\n### $file ###\n"
         $COMMAND -n$COUNT $file
     elif [[ $recursive = "true" ]]; then
         ./$0 $file --$COMMAND $COUNT
-	fi
+    fi
 done
 
