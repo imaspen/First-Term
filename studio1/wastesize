@@ -3,8 +3,8 @@
 # Make the waste directory if it does not yet exist.
 mkdir -p ~/.waste
 
-# Sets lines equal to the number of lines output by ls -l, minus the top info line,
+# Get the number of lines in the waste directory that are not directories of symlinks. 
 lines=$(ls -l ~/.waste | grep -c ^-)
 
-# Outputs the number of files in ~/.waste.
 echo "Files in waste:" $lines
+
