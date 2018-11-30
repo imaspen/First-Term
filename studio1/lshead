@@ -1,17 +1,14 @@
 #!/bin/bash
 
 # Setup variables to be used in the final command.
-COMMAND="head"
-COUNT=10
-RECURSIVE=false
-DIRECTORY=.
-FILES=""
+mode="head"
+count=10
+recursive=false
+directory=.
 
 # For each passed argument, change the relevant variable.
 while (( $# )); do
-    if [[ -d $1 ]]; then
-        DIRECTORY=$1
-    elif [[ "$1" = "--help" ]]; then
+    if [[ "$1" = "--help" ]]; then
         echo "Prints the first or last lines of files in a directory."
         echo "Usage: lshead [[--head|--tail] count] [--recursive] [directory]"
         echo "Options:"
@@ -20,15 +17,23 @@ while (( $# )); do
         echo -e "\t-r, --recursive:\tview files in subdirectories"
         exit 1
     elif [[ "$1" =~ ^((-r)|(--recursive))$ ]]; then
-        RECURSIVE=true
+        recursive=true
     elif [[ "$1" =~ ^((-t)|(--tail))$ ]]; then
-        COMMAND="tail"
+        mode="tail"
         shift
-        COUNT="$1"
+        count="$1"
     elif [[ "$1" =~ ^((-h)|(--head))$ ]]; then
-        COMMAND="head"
+        mode="head"
         shift
-        COUNT="$1"
+        count="$1"
+    elif [[ "$1" =~ ^((-d)|(--directory))$ ]]; then
+        shift
+        if [[ -d $1 ]]; then
+            directory=$1
+        else
+            echo "Invalid directory given."
+            exit 1
+        fi
     else
         echo "Unrecognized argument: $1"
         echo "Use lshead --help for more info."
@@ -38,12 +43,13 @@ while (( $# )); do
 done
 
 # Get all non-directory files from the given directory.
-for file in $DIRECTORY/*; do
+for file in $directory/*; do
     if [[ ! -d $file ]]; then
-        echo -e "\n### $file ###\n"
-        $COMMAND -n$COUNT $file
+        echo -e "\n## $file ##\n"
+        $mode -n$count $file
     elif [[ $recursive = "true" ]]; then
-        ./$0 $file --$COMMAND $COUNT
+        echo -e "\n#### $file ####"
+        ./$0 --directory $file --$mode $count
     fi
 done
 
