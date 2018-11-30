@@ -38,7 +38,10 @@ while (( $# )); do
 	elif [[ $current = '' ]] && [[ $all_flag = false ]]; then
 		current="$1"
 	elif [[ $new = '' ]] && [[ $strip_flag = false ]]; then
-		new=".$1"
+        new="$1"
+        if [[ "${new:0:1}" != "." ]]; then
+            new=".$new"
+        fi
 	fi
     shift
 done
@@ -59,11 +62,15 @@ cd $dir
 
 if [[ $all_flag ]]; then
     for file in *; do
-        mv "$file" "${file%.*}$new" 
+        if [[ ! -d $file ]]; then
+            mv "$file" "${file%.*}$new"
+        fi 
     done
 else
     for file in *.$current; do
-        mv "$file" "${file%.$current}$new"
+        if [[ ! -d $file ]]; then
+            mv "$file" "${file%.$current}$new"
+        fi
     done
 fi
 
