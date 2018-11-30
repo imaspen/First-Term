@@ -42,12 +42,14 @@ while (( $# )); do
     shift
 done
 
-# Get all non-directory files from the given directory.
+# Get all files from the given directory.
 for file in $directory/*; do
     if [[ ! -d $file ]]; then
+        # If file is not a directory, output it's name and run the chosen command.
         echo -e "\n## $file ##\n"
         $mode -n$count $file
     elif [[ $recursive = "true" ]]; then
+        # If file is a directory and recursive flag was set, run the script again from the directory.
         echo -e "\n#### $file ####"
         ./$0 --directory $file --$mode $count
     fi
