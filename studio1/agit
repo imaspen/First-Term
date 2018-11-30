@@ -74,6 +74,7 @@ function revertChanges {
     fi
 }
 
+# Handle user input
 case "$1" in
     help | --help | -h)
         giveHelp
