@@ -6,9 +6,10 @@ mkdir -p ~/.waste
 # If waste contains files, move to the waste directory, output bytes for each file, then move back.
 if [ "$(ls -A ~/.waste)" ]; then
 	# Output templating
-	echo -e "Size (bytes), file name"
+	echo -e "Size\tFile Name"
 	cd ~/.waste/
-	wc -c *
+    # Get output of wc bytes count, trim leading spaces, and replace middle space with a tab.
+	wc -c * | awk '{$1=$1};1' | tr ' ' \\t
 	cd - > /dev/null
 else
 	echo "Waste is empty."

@@ -33,9 +33,11 @@ function addFile {
             exit 1
         fi
 
+        shift
+
         # append a custom message and commit
-        if [[ $2 != "" ]]; then
-            message="$message: $2"
+        if [[ $1 != "" ]]; then
+            message="$message: $@"
         fi
 
         git commit -m "$message"
@@ -72,6 +74,7 @@ function revertChanges {
     fi
 }
 
+# Handle user input
 case "$1" in
     help | --help | -h)
         giveHelp

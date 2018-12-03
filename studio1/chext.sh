@@ -10,12 +10,13 @@ dir=.
 all_flag=false
 strip_flag=false
 
+# If no arguments given or the help switch given, give help and exit
 if (( $#==0 )) || [[ "$1" =~ ^((-h)|(--help))$ ]]; then
     echo "chext: Changes all files of one extension to another."
     echo "Usage: chext [-d dir] [in|-a] [out|-s]"
-    echo "  -d: set the directory to change file extensions, defaults to ."
-    echo "  -a: changes the extension for all files"
-    echo "  -s: removes file extensions"
+    echo -e "\t-d:\tset the directory to change file extensions, defaults to ."
+    echo -e "\t-a:\tchanges the extension for all files"
+    echo -e "\t-s:\tremoves file extensions"
     exit 1
 fi
 
@@ -37,7 +38,10 @@ while (( $# )); do
 	elif [[ $current = '' ]] && [[ $all_flag = false ]]; then
 		current="$1"
 	elif [[ $new = '' ]] && [[ $strip_flag = false ]]; then
-		new=".$1"
+        new="$1"
+        if [[ "${new:0:1}" != "." ]]; then
+            new=".$new"
+        fi
 	fi
     shift
 done
@@ -58,11 +62,15 @@ cd $dir
 
 if [[ $all_flag ]]; then
     for file in *; do
-        mv "$file" "${file%.*}$new" 
+        if [[ ! -d $file ]]; then
+            mv "$file" "${file%.*}$new"
+        fi 
     done
 else
     for file in *.$current; do
-        mv "$file" "${file%.$current}$new"
+        if [[ ! -d $file ]]; then
+            mv "$file" "${file%.$current}$new"
+        fi
     done
 fi
 
