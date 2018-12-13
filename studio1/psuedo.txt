@@ -1,0 +1,31 @@
+if (argument 1 == help) {
+    output help
+}
+
+0 -> letters, digits, other
+argument 1 -> input
+false -> done
+
+loop forever {
+    for (char in input) {
+        if (char is a letter) {
+            letters++
+        } else if (char is a number) {
+            numbers++
+        } else {
+            other++
+            if (char == control character) {
+                true -> done
+                break
+            }
+        }
+    }
+    
+    if done break
+
+    get input -> input
+}
+
+output letters
+output digits
+output other
