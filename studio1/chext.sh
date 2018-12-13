@@ -1,4 +1,5 @@
 #!/bin/bash
+# Aspen Thompson, u1862679@hud.ac.uk
 # Takes an input file extension and changes all files to another extension.
 
 info_string="For more info, use chext --help"

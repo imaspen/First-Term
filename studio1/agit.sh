@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Aspen Thompson, u1862679@hud.ac.uk
 # Shortcuts a number of git tasks.
 
 # Give help

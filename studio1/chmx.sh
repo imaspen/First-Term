@@ -1,4 +1,6 @@
 #!/bin/bash
+# Aspen Thompson, u1862679@hud.ac.uk
+# Make a file executable
 
 # If we were passed an argument that is a file and not a directory
 if (( $#==1 )) && [[ -e $1 ]] && [[ ! -d $1 ]]; then

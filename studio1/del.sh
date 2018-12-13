@@ -1,4 +1,6 @@
 #!/bin/bash
+# Aspen Thompson, u1862679@hud.ac.uk
+# Moves a file to a wastebin
 
 # Make the waste directory in the users home directory if it does not exist.
 mkdir -p ~/.waste

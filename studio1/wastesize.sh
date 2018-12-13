@@ -1,4 +1,6 @@
 #!/bin/bash
+# Aspen Thompson, u1862679@hud.ac.uk
+# Gets the number of files in the waste directory
 
 # Make the waste directory if it does not yet exist.
 mkdir -p ~/.waste

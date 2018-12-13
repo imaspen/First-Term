@@ -1,4 +1,6 @@
 #!/bin/bash
+# Aspen Thompson, u1862679@hud.ac.uk
+# Counts the number of characters given until a specific character is inputted
 
 # Check if the help command or no input was passed and give help.
 if [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "" ]]; then
@@ -38,8 +40,7 @@ while true; do
 	fi
 
 	# Ask the user for more input.
-	echo -n "Input a string or enter * to finish: "
-	read input
+	read -p "Input a string, include * to finish: " input
 done
 
 # Output the counters.

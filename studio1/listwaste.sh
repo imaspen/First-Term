@@ -1,4 +1,6 @@
 #!/bin/bash
+# Aspen Thompson, u1862679@hud.ac.uk
+# List the contents and size of each file within the wastebin
 
 # Make waste directory if it does not exist.
 mkdir -p ~/.waste
