@@ -1,5 +1,8 @@
 #!/bin/bash
-# Aspen Thompson, u1862679@hud.ac.uk
+# Aspen Thompson
+# u1862679@hud.ac.uk
+# v1.0.0
+# 2018-12-14
 # Counts the number of characters given until a specific character is inputted
 
 # Check if the help command or no input was passed and give help.

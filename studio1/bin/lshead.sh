@@ -1,5 +1,8 @@
 #!/bin/bash
-# Aspen Thompson, u1862679@hud.ac.uk
+# Aspen Thompson
+# u1862679@hud.ac.uk
+# v1.0.0
+# 2018-12-14
 # List the first or last lines of all files in a directory
 
 # Setup variables to be used in the final command.

@@ -1,5 +1,8 @@
 #!/bin/bash
-# Aspen Thompson, u1862679@hud.ac.uk
+# Aspen Thompson
+# u1862679@hud.ac.uk
+# v1.0.0
+# 2018-12-14
 # Moves a file to a wastebin
 
 # Make the waste directory in the users home directory if it does not exist.

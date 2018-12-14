@@ -1,5 +1,8 @@
 #!/bin/bash
-# Aspen Thompson, u1862679@hud.ac.uk
+# Aspen Thompson
+# u1862679@hud.ac.uk
+# v1.0.0
+# 2018-12-14
 # Make a file executable
 
 # If we were passed an argument that is a file and not a directory
